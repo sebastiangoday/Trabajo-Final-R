@@ -1,0 +1,389 @@
+---
+title: "Ejercicio Final: Business Performance Analysis"
+author: "Carlos Sebastián Goday Ruiz"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output:
+  rmdformats::readthedown:
+  self_contained: true
+thumbnails: true
+lightbox: true
+gallery: false
+highlight: espresso
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center")
+
+## Librerias Requeridas
+library(pander) 
+library(ggplot2)# por favor instalar el paquete ggplot2
+library(rmarkdown)
+library(lattice)
+library(stringi)
+library(stringr)
+library(rvest)
+library(ggthemes)
+library(plotly)
+library(tmap)
+library(spData)
+library(tmaptools)
+
+
+# Por favor instalar paquetes:
+# Pander
+# ggplot2
+# xml2
+# lattice
+# graphics
+# grDevices
+# plyr
+# reshape2
+# rmarkdown
+# rmdformats
+# rvest
+# string
+# stringr
+# Plotly
+# ggthemes
+# tmap
+# tmaptools
+# spData
+
+```
+
+## **Introducción**
+
+El presente trabajo constituye la entrega final correspondiente al curso de R dictado por el profesor **Carlos J. Gil Bellosta**, en el marco del Máster en Big Data y Analytics de la EAE Business School, edición 2019-2020.
+
+El objetivo de este proyecto es poner en práctica los conocimientos más relevantes adquiridos a lo largo del curso, abarcando temas como : expresiones regulares, herramientas de Rmarkdown, manejo de datos externos, gráficos basados en ggplot2, entre otros puntos.
+
+------------------------------------------------------------------------------------------
+
+
+## **1. Expresiones Regulares**
+
+En este apartado llevaremos a cabo un breve análisis del contenido expuesto por los siguientes artículos:
+
+1. [_Regular Expressions Explained_](https://bit.ly/2XnixJN )
+
+2. [_Regular Expressions Tutorial_](https://bit.ly/2XqOf91 )
+
+
+### _Regular Expressions Explained_
+
+El artículo _Regular Expressions Explained_ nos propone una exposición concreta y concisa del concepto de "Expresiones Regulares" desde la perspectiva de un desarrollador/ analista de datos. No obstante estar orientado a un público con conocimientos técnicos, notamos que el estilo y el léxico elegidos por el autor hacen que el artículo resulte entendible para cualquier individuo interesado en la materia, al margen de su nivel o experiencia como programador.
+
+El autor define una expresión regular como una cadena de texto que determina un patrón de búsqueda, idea con la que fácilmente podemos inferir el potencial que las expresiones regulares poseen al momento de gestionar datos en general, y de manejar texto en particular. Asimismo, se deja en claro cuáles son los usos principales para los patrones creados con las expresiones regulares:
+
+1. Encontrar un trozo de texto dentro de un texto más grande.
+2. Validar que el texto encontrado cumple con un formato deseado.
+3. Reemplazar o insertar texto.
+4. Partir cadenas de texto.
+
+
+--------------------------------------------------------------------------------------
+
+### _Regular Expressions Tutorial_
+
+_Regular Expressions Tutorial_ constituye, sin lugar a dudas, una guía completa para aprender a trabajar con expresiones regulares (de aquí en más referidas como _regex_ en singular y _regexes_ en plural). 
+El tutorial comienza su recorrido definiendo las _regexes_ como “un patrón que describe una cierta cantidad de texto”. Luego, utilizando un criterio basado en colores, describe cada una de las partes que componen a una _regex_, tomando como ejemplo el patrón clásico de búsqueda de correos electrónicos
+
+Continuando, el artículo da paso a una sección dedicada a los motores de regex _(Regular Expression Engines)_. Diferentes motores tienen diferentes comportamientos, a los que se refiere como _”flavors”_ o “sabores”, existiendo diferencias de sintaxis que vale la pena tener en cuenta. 
+
+ Para finalizar la primera sección, el autor nos invita a probar un motor de _regexes_  llamado _EditPad Pro_, que permite poner en práctica el concepto de _regex_ , buscando palabras en un texto.
+
+
+### Conclusión
+
+Si bien ambos artículos ofrecen una explicación clara, entendible, concreta y concisa del concepto de "Expresiones Regulares", personalmente me inclinaría por el segundo, _Regular Expressions Tutorial_. A continuación listo los motivos de mi predilección:
+
+1. Guía completa para aprender todo lo que se necesita para empezar a trabajar con expresiones regulares.
+2. Lenguaje claro y de fácil compresión, tanto par técnicos como para no técnicos.
+3. Ofrece una visión holística del concepto de _regex_ aplicable a cualquier lenguaje de programación en que se deseen usar.
+4. Referencia a motores de expresiones regulares que permiten entenderlas en la práctica.
+5. Este artículo es mencionado en múltiples otros blogs y páginas web, hecho que surge como clara evidencia de su utilidad y practicidad  
+
+
+
+------------------------------------------------------------------------------------------
+
+## **2. Herramientas de R Markdown**
+
+En este apartado analizaremos los siguientes contenidos sobre herramientas de R Markdown:
+
+1.	[_R Markdown from R Studio_](https://bit.ly/2KCmzsR)
+
+2.	[_Getting Started with R Markdown_](https://bit.ly/2Qy7fkP) 
+
+
+### _R Markdown from RStudio_
+
+
+La guía de _RStudio_ para _R Markdown_ cuenta con una estructura limpia, fácil de navegar, entendible y con una estética agradable, empezando con un vídeo introductorio que nos da una idea general de cómo funciona la herramienta. La presentación de un menú con todos los contenidos en el margen izquierdo de la página aporta un alto grado de dinamismo y claridad en la lectura de la guía.
+
+
+Creo firmemente que, si bien los manuales de R Markdown se caracterizan por su ubicuidad, tanto en formato escrito como en vídeo, la guía de RStudio resulta una excelente opción al momento comenzar a trabajar con la herramienta.
+
+### _Getting Started with R Markdown_
+
+La página _Getting Started with R Markdown_ nos permite comprender, rápidamente, qué es un documento R Markdown, explicando, paso a paso, para qué se usa la herramienta, cómo se construye un documento _R Markdown_ y las diferentes maneras de exportarlo.
+
+La tabla de contenidos del tutorial abarca todos los puntos principales requeridos para comenzar con R Markdown, aunque debe decirse que el estilo y la navegabilidad del sitio dejan bastante que desear.
+
+### Conclusión
+
+Si bien el artículo _Getting Started with R Markdown_ contiene toda la información necesaria para entender los principales conceptos de R Markdown, creo firmemente que el primer artículo, _R Markdown from RStudio_, propone una estructura de aprendizaje y lectura mucho más ordenada y agradable, incluyendo un video introductorio y múltiples ejemplos de uso de cada una de las funciones de la herramienta que pueden ejecutarse en _R Studio_ online.
+
+--------------------------------------------------------------------------------------- 
+
+## **3. Tablas y Gráficos**
+
+El propósito del presente apartado es poner en práctica los siguientes conocimientos en R:
+
+1. Manejo de Tablas.
+2. Creación y edición de gráficos de ```ggplot2``` con distintos temas.
+3. Creación de gráficas de ```ggplot2``` con facetas.
+4. Extracción de datos aplicando _Webscarping_
+5. Creación de gráficos dinámicos con ```plotly``` y ```tmap```
+
+### Tabla ```ToothGrowth``` (```ggplot2```)
+Comenzamos esta sección recurriendo a la tabla ```_ToothGrowth_``` , en la que se registra el efecto ciertos suplementos en el crecimiento dental de conejillos de Indias _(Guinea Pigs)_ 
+
+
+#### Vista general de ```ToothGrowth``` (con ```pander```)
+
+
+```{r , echo=FALSE,fig.align='center'}
+# Tabla ToothGrowth
+# Trbajo con una copia de ToothGrowth
+cre_dientes = ToothGrowth
+# Cambio los nombres de las columnas
+names(cre_dientes)[c(1,2,3)]<- c("Largo_Dental","Suplemento","Dosis")
+# Muestro la tabla con las columnas cambiadas (usando pander)
+pander(head(cre_dientes))
+
+
+```
+
+
+---------------------------------------------------------------------------------------------------------
+
+
+#### Vitamina C vs Dientes (```ggplot2``` + ```theme_few()```)
+
+
+Considerando los datos provistos por ```_ToothGrowth_``` resulta interesante graficar la relación entre las dosis de vitamina C y el crecimiento de los dientes.
+
+
+```{r , echo=FALSE}
+# Tabla ToothGrowth
+# Relaciono la dosis dada a los conejillos, con el largo de sus dientes.
+ggplot(cre_dientes, aes(x=factor(Dosis), y=Largo_Dental, fill=factor(Dosis))) + 
+    geom_boxplot() +
+    labs(title="Como impacta la vitamina C", 
+         subtitle="en el crecimiento de los dientes de los conejillos de Indias", 
+         caption="Dosis vs Largo de Dientes",
+         y="% de Crecimiento", 
+         x="Dosis")+theme_few()
+
+
+
+```
+
+
+-------------------------------------------------------------------------------------------- 
+
+### Tabla ```State77```
+
+
+En esta sección analizamos los datasets ```State77```, ```state.region``` y ```state.name``` para así poder graficar algunos datos interesantes en relación a los Estados Unidos en la década de los 70.
+
+
+-------------------------------------------------------------------------------------------- 
+
+
+```{r , echo=FALSE, message=FALSE}
+# Preparo los datos.
+# creo un dataframe en base a datos de Estados Unidos y la tabla state77
+tabla_datos_usa <- data.frame(state = state.name, 
+                 region = state.region,
+                 state.x77[, c("Illiteracy", "Income", "HS Grad", "Murder")],
+                 row.names = NULL)
+
+```
+
+
+#### **Densidad de Asesinatos por Región**
+
+
+
+```{r, warning=FALSE, echo=FALSE}
+# Ahora utilizo un gráfico de densidad
+ggplot(tabla_datos_usa, aes(Murder , fill= region)) + 
+  labs(title = "Densidad de Asesinatos por región", 
+       subtitle = "en los Estados Unidos de América (1970)",
+       x= "Asesinatos", 
+       y = "Densidad",
+       caption = "Datos obtenidos de la tabla state77"
+       )+
+  geom_density(alpha = 0.7)+ theme_clean()
+```
+
+----------------------------------------------------------------------------------------------------------
+
+
+
+#### **Salarios vs Graduados de secundaria (```facet_wrap()``` + ```theme_economist()```)**
+
+```{r , echo=FALSE, message=FALSE}
+
+#Grafico con ggplot2 con tema editado
+ggplot(tabla_datos_usa, aes(x = Income , y = HS.Grad,)) + 
+              geom_point(size =2, colour = "blue")+ geom_smooth(alpha = 0.2, colour = "firebrick")+ facet_wrap(~region)+
+              labs(title = "Salarios VS Porcentaje de Graduados por Región", x = "Salarios", y = "Porcentaje de graduados", caption = "Datos obtenidos de la tabla state77")+ 
+  theme_economist() + 
+  theme(
+    panel.background = element_rect(fill = "white"),
+    panel.grid.minor = element_line(linetype = "dotted"),
+    panel.grid.major =  element_line(linetype = "dotted"                               
+                                    )
+  )
+
+```
+
+----------------------------------------------------------------------------------------------------------
+
+
+
+#### **Analfabetismo vs Asesinatos (```facet_grid()``` + ```theme_stata()```)**
+
+
+```{r , echo=FALSE, message=FALSE, warning=FALSE}
+## Graficamos usando ggplot2 con tema de ggthemes
+ggplot(tabla_datos_usa, aes(x = Illiteracy , y = Murder)) + 
+  geom_jitter(colour = "red") + geom_smooth(alpha = 0.2)+ facet_grid(~region)+
+  labs(title = "Analfabetismo - Asesinatos", x = "Analfabetismo", y = "Asesinatos",caption = "Datos obtenidos de la tabla state77")+
+  theme_stata()
+
+```
+
+
+---------------------------------------------------------------------------------------------------
+
+
+### **Campeones del Mundo _(Webscarping + ```theme_solarized()```)_**
+
+Una de las funcionalidades más interesantes que ofrece R es la de hacer _Webscraping_ o raspado de páginas web.
+
+Como ejemplo de _Webscraping_, extraeremos el [Palmarés del Mundial de Fútbol](https://www.marca.com/futbol/mundial/palmares.html) presente en el sitio web de Marca, para luego crear una gráfica sencilla utilizando ```ggplot2```. 
+
+
+
+#### **Palmarés de Mundiales**
+
+
+```{r , echo=FALSE, message=FALSE}
+#Guardo la página en una variable
+tabla_Mundial <- "https://www.marca.com/futbol/mundial/palmares.html"
+# Leo como html
+tmp2 <- read_html(tabla_Mundial)
+# Transformo nodos en tablas
+tmp2 <- html_nodes(tmp2, "table")
+# Identifico cuántas tablas hay y con qué dimensiones
+#sapply(tmp2, function(x) dim(html_table(x, fill = TRUE))) 
+# Extraigo la tabla que corresponde
+mundiales <- html_table(tmp2[[1]])
+mundiales_celebrados <- mundiales[-c(19,20), ] 
+# Limpio algunos nombres con tildes y otros caracteres (problema encoding pander v3.41 y v3.40)
+names(mundiales_celebrados)[1]= "Año"
+names(mundiales_celebrados)[2]= "Campeon"
+names(mundiales_celebrados)[3]= "Subcampeon"
+mundiales_celebrados$Campeon[c(12,17)] = "Alemania"
+
+## Quito las ñ de España de campeon y sede
+mundiales_celebrados$Campeon<- gsub("España","Espana",mundiales_celebrados$Campeon)
+mundiales_celebrados$Sede <- gsub("España","Espana",mundiales_celebrados$Sede)
+# Quito tildes de Mexico, Japon y Sudafrica de las sedes
+mundiales_celebrados$Sede <- gsub("México","Mexico",mundiales_celebrados$Sede)
+mundiales_celebrados$Sede <- gsub("Japón","Japon",mundiales_celebrados$Sede)
+mundiales_celebrados$Sede <- gsub("Sudáfrica","Sudafrica",mundiales_celebrados$Sede)
+# Quito tilde de Hungria en subcampeon
+mundiales_celebrados$Subcampeon <- gsub("Hungría","Hungria",mundiales_celebrados$Subcampeon)
+
+pander(mundiales_celebrados)
+
+
+```
+
+
+
+
+#### **Mundiales por País**
+
+
+```{r , echo=FALSE, message=FALSE}
+## Grafico usando ggplot2
+# Devuelvo la ñ a España
+mundiales_celebrados$Campeon<- gsub("Espana","España",mundiales_celebrados$Campeon)
+ggplot(data = mundiales_celebrados, aes(x = Campeon)) + 
+  geom_bar(color = 'black', fill = 'darkblue') + 
+  labs(title="Copa Mundial de Fútbol", 
+       subtitle="Cantidad de copas ganadas por país", 
+       caption="Datos obtenidos de Marca.com",
+       y="Copas", 
+       x="País",
+       colour= NULL)+ theme_solarized()
+
+
+```
+
+
+### Gráficos Dinámicos (```Plot_ly``` + ```tmap```)
+
+En esta sección damos paso a algunos ejemplos sencillos de aplicación de gráficos dinámicos con ```ggplot2```, particularmente, mediante la utilización de ```plotly```y ```tmap```
+
+#### **Ejemplo clásico: mapa de calor de un volcán (```plot_ly```)**
+
+Uno de los ejemplos tradicionales de ```plotly```, utilizando un esquema de ```heatmap```, es el de mostrar un gráfico dinámico como el que se ve a continuación:
+
+```{r , echo=FALSE, message=FALSE}
+plot_ly(z = volcano, type = "heatmap")
+```
+
+
+#### **Relación Asesinatos - Salarios por Región**
+
+Utilizando los datos de Estados Unidos vistos con anterioridad en este informe, podemos crear un gráfico dinámico en el que establecemos una relación entre el nivel de salarios y la cantidad de homicidios por región.
+
+```{r , echo=FALSE, message=FALSE}
+plot_ly(data = tabla_datos_usa, x = ~Murder, y = ~Income, color = ~region, type = "scatter", mode = "markers") %>%
+  layout(title = 'Relación entre Homicidios y Salarios por región', 
+         xaxis = list(title = 'Homicidios'),
+         yaxis = list(title = "Salarios"))
+
+```
+
+#### **Mundiales de Fútbol: Campeón, Año y Subcampeón**
+
+Similar al ejemplo anterior, podemos crear un gráfico dinámico utilizando la información obtenida en la sección de _Webscraping_. En este caso, utilizamos el parámetro ```symbol``` para identificar a los subcampeones en el gráfico. 
+
+```{r , echo=FALSE, message=FALSE, warning=FALSE}
+names(mundiales_celebrados)[1]= "Ano"
+plot_ly(data = mundiales_celebrados, x = ~Campeon, y = ~Ano, symbol = ~Subcampeon, type = "scatter", mode = "markers") %>%
+  layout(title = 'Campéon, Año y Subcampeón', 
+         xaxis = list(title = 'Campeones'),
+         yaxis = list(title = "Año"))
+```
+
+#### **Happy Planet Index (```tmap```)**
+
+Por último, resulta interesante incluir el "Happy Planet Index" como ejemplo de mapa interactivo utilizando ```tmap```
+
+```{r,echo=FALSE,warning=FALSE, message=FALSE}
+data("World")
+tmap_mode("view")
+tm_shape(World) +
+  tm_polygons("HPI")
+
+```
