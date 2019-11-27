@@ -326,14 +326,13 @@ pander(mundiales_celebrados)
 ## Grafico usando ggplot2
 # Devuelvo la ñ a España
 mundiales_celebrados$Campeon<- gsub("Espana","España",mundiales_celebrados$Campeon)
-ggplot(data = mundiales_celebrados, aes(x = Campeon)) + 
-  geom_bar(color = 'black', fill = 'darkblue') + 
+ggplot(data = mundiales_celebrados, aes(Campeon)) + 
+  geom_bar(fill = sapply(1:8/8, hsv, 0.7, 0.7)) + 
   labs(title="Copa Mundial de Fútbol", 
        subtitle="Cantidad de copas ganadas por país", 
        caption="Datos obtenidos de Marca.com",
        y="Copas", 
-       x="País",
-       colour= NULL)+ theme_solarized()
+       x="País")+ theme_solarized()
 
 
 ```
